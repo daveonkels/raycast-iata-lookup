@@ -36,7 +36,39 @@ Open Raycast and search for **Search IATA Codes**. The development command watch
 
 ## Updates
 
-On the first of each month, GitHub checks the source data and proposes changes for review. Each briefing shows the source dates that apply to that record. To pick up a merged refresh, run `git pull --ff-only` in your checkout and restart `ray develop`. [Refresh runs](https://github.com/daveonkels/raycast-iata-lookup/actions/workflows/refresh.yml) · [Maintainer guide](docs/data.md)
+On the first of each month, GitHub checks the source data and proposes changes for review. Each briefing shows the source dates that apply to that record. [Refresh runs](https://github.com/daveonkels/raycast-iata-lookup/actions/workflows/refresh.yml) · [Maintainer guide](docs/data.md)
+
+### Set up daily updates on macOS
+
+After **Search IATA Codes** works in Raycast, stop the development watcher with **Ctrl-C**. From the cloned repository, run the installer as your normal macOS user. It needs Python 3.9 or newer, Node.js and the same installed Raycast CLI you used above.
+
+```sh
+python3 tools/macos/install-updater.py
+```
+
+If `ray` is outside your shell’s PATH, pass its full path. For example, if you use the CLI from another extension:
+
+```sh
+python3 tools/macos/install-updater.py --ray "/path/to/extension/node_modules/.bin/ray"
+```
+
+Your Mac checks the public `main` branch at **9:00 AM local time** while you’re logged in. If the Mac sleeps through that time, it checks after waking. When data changes, the updater builds it with the code from your checkout’s local `main` branch, verifies the search and profiles, and replaces the installed bundle in one step. If a download or build fails, Raycast keeps using the last working bundle and the updater tries again on its next scheduled run. Searches work offline.
+
+Keep the checkout and build tools available. Rerun the installer if you move the checkout, replace your Node.js or Raycast CLI installation, or want a newer version of the updater. For extension **code** updates, pull `main` and rebuild with `ray develop`.
+
+To run a check immediately, then inspect its status and log:
+
+```sh
+launchctl kickstart "gui/$(id -u)/com.daveonkels.raycast-iata-update"
+launchctl print "gui/$(id -u)/com.daveonkels.raycast-iata-update"
+tail -n 20 "$HOME/Library/Application Support/IATA Lookup Updater/updater.log"
+```
+
+The log records installations and errors. An already-current check exits successfully without adding a log entry. To remove the daily job and keep the extension installed:
+
+```sh
+python3 tools/macos/install-updater.py --uninstall
+```
 
 ## Data and license
 
