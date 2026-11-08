@@ -1,6 +1,6 @@
 # IATA Lookup for Raycast
 
-Type `RST` to see Rochester’s runways and tower frequency, `B6` to see how a JetBlue flight would identify itself on the radio, or `738` to look up the Boeing 737-800’s wingspan. IATA Lookup searches 9,045 airports, 787 airlines, and 525 aircraft and equipment entries. All lookups run on your Mac using the bundled data.
+Type `RST` to see Rochester’s runways and tower frequency, `B6` to see how a JetBlue flight would identify itself on the radio, or `738` to look up the Boeing 737-800’s wingspan. Search airports, airlines, and aircraft or equipment by code, name, or city. All lookups run on your Mac using the bundled data.
 
 ![Rochester International Airport briefing with a north-up runway diagram and field information](docs/screenshots/airport.png)
 
@@ -33,6 +33,10 @@ ray develop
 ```
 
 Open Raycast and search for **Search IATA Codes**. The development command watches for edits. To build the extension bundle into a local directory, run `ray build -e dist -o dist`. The repository includes all lookup data and requires no API key or background service.
+
+## Updates
+
+On the first of each month, GitHub checks the source data and proposes changes for review. Each briefing shows the source dates that apply to that record. To pick up a merged refresh, run `git pull --ff-only` in your checkout and restart `ray develop`. [Refresh runs](https://github.com/daveonkels/raycast-iata-lookup/actions/workflows/refresh.yml) · [Maintainer guide](docs/data.md)
 
 ## Data and license
 

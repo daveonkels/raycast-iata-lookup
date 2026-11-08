@@ -1,7 +1,4 @@
-"""Build offline profiles from Duffel, OpenFlights and the FAA ACD (October 2024).
-Input directory: airlines.dat, planes.dat, routes.dat, airports.dat from OpenFlights
-115067fd23d1221f93edfda3701a69e106672953, and faa.xlsx from faa.gov/airports/engineering/aircraft_char_database/aircraft_data.
-"""
+"""Build carrier and aircraft profiles from Duffel, OpenFlights and FAA inputs."""
 import csv
 import json
 import re
@@ -13,6 +10,7 @@ from pathlib import Path
 from openpyxl import load_workbook
 
 root = Path(__file__).resolve().parents[1]
+assets = Path(sys.argv[3]) if len(sys.argv) > 3 else root / "assets"
 src = Path(sys.argv[1])
 duffel_data = Path(sys.argv[2])
 
@@ -39,7 +37,7 @@ def duffel(kind):
     return json.loads((duffel_data / f"{kind}.json").read_text())
 
 def write(name, data):
-    (root / f"assets/{name}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
+    (assets / f"{name}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
 
 carriers = group("airlines.dat", 3)
 places = {row[0]: row for row in records("airports.dat")}
@@ -63,7 +61,7 @@ for row in duffel("airlines"):
     routes = networks[(ident, code)]
     if routes:
         counts = Counter(station for pair in routes for station in pair)
-        ranked = sorted(counts, key=lambda s:(-counts[s], places[s][1]))
+        ranked = sorted(counts, key=lambda s:(-counts[s], places[s][1], s))
         facts['network'] = dict(pairs=len(routes), airports=len(counts),
             top=[dict(name=places[s][1], code=places[s][4], count=counts[s]) for s in ranked[:3]])
     if facts: airlines[row['id']] = facts
@@ -90,6 +88,7 @@ fleet = duffel('aircraft')
 family_re = re.compile(r'\b(Airbus A[23]\d{2}|Boeing [7]\d7|ATR [47]2|DHC-[68]|Embraer (?:170|175|190|195)|Saab (?:2000|340)|DC-\d+|MD-?\d{2}|Fokker (?:50|70|100)|Gulfstream G\d{3})', re.I)
 for row in fleet:
     name,code=row['name'],row['iata_code']
+    if not code: continue
     options=[p for p in planes[code] if model(p[0])==model(name) and p[2]]
     direct=by_model[model(name)]
     types={p[2] for p in options} | {r['ICAO_Code'] for r in direct}

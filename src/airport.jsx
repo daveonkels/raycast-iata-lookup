@@ -1,3 +1,4 @@
+import sources from "../assets/sources.json";
 import { useMemo } from "react";
 import { Action, ActionPanel, Detail, environment } from "@raycast/api";
 import { readFileSync } from "node:fs";
@@ -55,7 +56,7 @@ export default function AirportDetail({row}) {
     ["Field elevation",elevation],["Latitude",coord(field.lat,"N","S")],["Longitude",coord(field.lon,"E","W")],
     ["Time zone",row.zone],["Airfield type",field.type?.replace(/_/g," ")],
     ["Scheduled service",field.scheduled_service],["Source",field.type ? "OurAirports · Duffel" : "Duffel"],
-    ["Snapshot","7 Nov 2026"]
+    ["Booking catalog", sources.duffel.date], ["Airfield data", field.type && sources.ourairports.date]
   ];
   return <Detail navigationTitle={[row.icao,row.code].filter(Boolean).join(" / ")} markdown={briefing(row, field)}
     metadata={<Detail.Metadata>{labels.filter(([,value]) => value).map(([title,text]) =>

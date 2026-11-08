@@ -1,3 +1,4 @@
+import sources from "../assets/sources.json";
 import { useMemo } from "react";
 import { Action, ActionPanel, Detail, environment } from "@raycast/api";
 import { readFileSync } from "node:fs";
@@ -37,7 +38,7 @@ export function AirlineDetail({row}) {
   parts.push(ids.join("  \n"), "Example flight number 123.");
   if (f.network) {
     const {airports,pairs,top} = f.network;
-    parts.push("## Route archive · June 2014",
+    parts.push("## Route archive · " + sources.openflights.routeArchive,
       "**" + fmt(airports) + " airports** linked by **" + fmt(pairs) + " nonstop airport pairs** in the archive. Each pair counts once in either direction. Codeshares are excluded.",
       "### Most nonstop connections",
       top.map(a => "**" + md(a.code || a.name) + "**　" + (a.code ? md(a.name) + " · " : "") + fmt(a.count) + (a.count === 1 ? " connection" : " connections")).join("\n\n"));
@@ -45,7 +46,7 @@ export function AirlineDetail({row}) {
   if (!f.directory) parts.push("Only the booking identity is confirmed in the offline carrier directory.");
   const labels = [["IATA airline code",row.code],["ICAO operator",f.icao],["Radio callsign",f.callsign],
     ["Country",f.country],["Also listed as",f.alias],["Carriage terms host",f.termsHost],
-    ["Directory",f.directory ? "Duffel · OpenFlights" : "Duffel"]];
+    ["Duffel catalog",sources.duffel.date], ["Directory",f.directory ? "Duffel · OpenFlights" : "Duffel"]];
   return <Profile row={row} markdown={parts.join("\n\n")} labels={labels} icao={f.icao} callsign={f.callsign}/>;
 }
 
@@ -77,7 +78,7 @@ export function AircraftDetail({row, catalog}) {
   const engine = spec?.engine && (spec.engines ? spec.engines + " × " : "") + spec.engine;
   const labels = [["IATA equipment",row.code],["ICAO type",f.icao],["Family",f.family],
     ["Manufacturer",spec?.maker],["Class",spec?.category],["Powerplants",engine],
-    ["Wake category",spec?.wake],["Specifications",spec && "FAA ACD · Oct 2024"],
-    ["Catalog", "Duffel"]];
+    ["Wake category",spec?.wake],["Specifications",spec && "FAA ACD · " + sources.faa.edition],
+    ["Duffel catalog", sources.duffel.date]];
   return <Profile row={row} markdown={parts.join("\n\n")} labels={labels} icao={f.icao}/>;
 }

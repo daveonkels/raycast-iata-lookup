@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 source = Path(sys.argv[1])
-assets = Path(__file__).resolve().parents[1] / "assets"
+assets = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(__file__).resolve().parents[1] / "assets"
 catalog = []
 airport_fields = {"icao": "icao_code", "city": "city_name", "country": "iata_country_code", "zone": "time_zone"}
 for kind, filename in [("Airport", "airports"), ("Airline", "airlines"), ("Aircraft", "aircraft")]:

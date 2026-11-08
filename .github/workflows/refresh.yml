@@ -1,0 +1,36 @@
+name: Refresh offline data
+on:
+  schedule:
+    - cron: '17 10 1 * *'
+  workflow_dispatch:
+
+permissions: {}
+concurrency:
+  group: refresh-offline-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Install the pinned workbook reader
+        run: |
+          python3 -m venv "$RUNNER_TEMP/reader"
+          "$RUNNER_TEMP/reader/bin/python" -m pip install --require-hashes --only-binary=:all: -r tools/requirements.txt
+      - name: Build and validate the candidate
+        run: |
+          "$RUNNER_TEMP/reader/bin/python" tools/refresh.py "$RUNNER_TEMP/candidate"
+          cat "$RUNNER_TEMP/candidate/review.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Propose changed data
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ github.event.repository.default_branch }}
+        run: bash tools/propose-refresh.sh "$RUNNER_TEMP/candidate"

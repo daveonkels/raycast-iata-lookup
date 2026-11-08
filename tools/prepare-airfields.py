@@ -1,4 +1,4 @@
-"""Build offline assets from OurAirports revision bdbcf5e2643119210d5c240f2e26ab2604ec5e38 (2026-11-07)."""
+"""Build offline airfield details from OurAirports and Duffel."""
 import csv
 import json
 import math
@@ -9,7 +9,7 @@ from pathlib import Path
 source = Path(sys.argv[1])
 duffel_data = Path(sys.argv[2])
 root = Path(__file__).resolve().parents[1]
-assets = root / 'assets/airfields'
+assets = (Path(sys.argv[3]) if len(sys.argv) > 3 else root / 'assets') / 'airfields'
 assets.mkdir(exist_ok=True)
 
 
@@ -45,6 +45,8 @@ shards = defaultdict(dict)
 matched = 0
 for airport in json.loads((duffel_data / 'airports.json').read_text()):
     country, iata, icao = (airport[k] for k in ('iata_country_code', 'iata_code', 'icao_code'))
+    if not iata:
+        continue
     lat, lon = airport['latitude'], airport['longitude']
     detail = {'lat': lat, 'lon': lon}
     candidates = by_icao.get((country, icao), []) or by_iata.get((country, iata), [])

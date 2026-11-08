@@ -1,0 +1,38 @@
+{
+  "duffel": {
+    "revision": "a9bb73cde38a02d07a4d764d7ce7a742dba4b8b6",
+    "date": "2026-11-07",
+    "files": {
+      "aircraft.json": "6db0604bb54f5087d8f70bc08fe94df7d319116e2ac7ab6826d86f36864e022d",
+      "airlines.json": "8caff5f9602fe373b411bb16cc3e2c3d76ff8a872bf081b5f87eb1cf78da3fc8",
+      "airports.json": "a0f94f757d977cfd2da9bd3c38c45db25c3bf42ece61bb4e3cb24645b0ddf580"
+    }
+  },
+  "ourairports": {
+    "revision": "bdbcf5e2643119210d5c240f2e26ab2604ec5e38",
+    "date": "2026-11-07",
+    "files": {
+      "airport-frequencies.csv": "c1b1f04b42040cdb50c470ce75962459ee9d168c27843046c0c66d540fd1f171",
+      "airports.csv": "8ed1da427be3cab1ae5f6fbbb4464a0a74c6bd2570ff9a73089539b7ccfef7f2",
+      "navaids.csv": "d7292380662c33a95214945023ec0a5b13189599305fd18be739e167a97a9bd1",
+      "regions.csv": "9220d6582b804cfdec8432e5bb21456699c9df8969bf5d8886beb62ff0b1318b",
+      "runways.csv": "b0bac6ad2a802eba770d57b3e42c191c888f3d334e42780f3d12ff5930650d07"
+    }
+  },
+  "openflights": {
+    "revision": "1db9191f2cd626088b5846eef15cb22961e42ac8",
+    "date": "2023-07-17",
+    "files": {
+      "airlines.dat": "39be1a432e8b04ebc12860c29281c974a9cb52169c82b2456a835d66ab1548a1",
+      "airports.dat": "9387cdb38df5bd664da823f8ccb69fdd9b33a1888f5b7cca09c34a3cd9ff59f9",
+      "planes.dat": "04ba419335a6ff1fd0e0383d0454ff5162b9e39fc76c0a02271b5fc57483d3ce",
+      "routes.dat": "bd373706238134f619c624c606dccc74c05c2582a977c489c81de501735f2390"
+    },
+    "routeArchive": "June 2014"
+  },
+  "faa": {
+    "url": "https://www.faa.gov/airports/engineering/aircraft_char_database/aircraft_data",
+    "edition": "October 2024",
+    "sha256": "3e68848b6bb99f9700e25d33c080b993a80dc962d581a391f89aee94b6c8fcb3"
+  }
+}
