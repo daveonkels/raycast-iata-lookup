@@ -15,7 +15,7 @@ GitHub checks at 10:17 UTC on the first of each month. To check now, run `gh wor
 
 1. Read the source revisions and the counts for additions, removals, reassignments, lost coverage and changes to aviation details. To examine a specific airport, compare its entries in the old and new JSON with a JSON viewer. Check consequential runway or frequency changes against the relevant aviation authority’s current publication.
 2. Inspect unexpected coverage changes. For a reassigned booking code, verify that the callsign belongs to the new carrier. For changed aircraft dimensions, verify the named FAA variant. Structural checks catch broken references and unusable data. Source corrections and real-world changes still need judgment.
-3. Merge the reviewed PR. In the installed extension’s checkout, run `git pull --ff-only` and restart `ray develop`. To withdraw a bad update, revert the snapshot PR and rebuild the installed extension.
+3. Merge the reviewed PR. Macs with the [daily updater](../README.md#set-up-daily-updates-on-macos) pick up the snapshot on their next check. For a manual installation, run `git pull --ff-only` and restart `ray develop`. To withdraw a bad snapshot, revert the PR. The updater picks up that revert through the same process.
 
 ## Reproduce or diagnose a run
 
