@@ -9,14 +9,14 @@
     }
   },
   "ourairports": {
-    "revision": "bdbcf5e2643119210d5c240f2e26ab2604ec5e38",
-    "date": "2026-11-07",
+    "revision": "64af12951161ed52bc733eb4101224643c48850a",
+    "date": "2026-11-08",
     "files": {
-      "airport-frequencies.csv": "c1b1f04b42040cdb50c470ce75962459ee9d168c27843046c0c66d540fd1f171",
-      "airports.csv": "8ed1da427be3cab1ae5f6fbbb4464a0a74c6bd2570ff9a73089539b7ccfef7f2",
+      "airport-frequencies.csv": "b5d492ed75fbe4e8bc1881b8e28079fd06b59b9e5a2cfb07104095f7c1c22f12",
+      "airports.csv": "5754df21f25cb08d2def8a80b3eb609ddc52a4217afa8eb48280b6428c06e78f",
       "navaids.csv": "d7292380662c33a95214945023ec0a5b13189599305fd18be739e167a97a9bd1",
       "regions.csv": "9220d6582b804cfdec8432e5bb21456699c9df8969bf5d8886beb62ff0b1318b",
-      "runways.csv": "b0bac6ad2a802eba770d57b3e42c191c888f3d334e42780f3d12ff5930650d07"
+      "runways.csv": "0ce3a2ce51cbf78d7f6039ccdbd8c59fa72133b12a0bf539fdfd43eafbac1602"
     }
   },
   "openflights": {
