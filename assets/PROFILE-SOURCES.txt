@@ -1,0 +1,15 @@
+Names and booking codes: Duffel snapshot in timrogers/iata-code-decoder-api, a9bb73c (2026-11-07).
+Carrier and aircraft directories, historical route pairs and airport labels: OpenFlights
+https://openflights.org/data.php and https://github.com/jpatokal/openflights/tree/115067fd23d1221f93edfda3701a69e106672953/data
+OpenFlights-derived profile data is made available under the Open Database License 1.0
+(https://opendatacommons.org/licenses/odbl/1-0/), individual contents under the Database Contents License.
+Routes are from the June 2014 archive. Counts exclude marked codeshares, stops and unidentified endpoints.
+Aircraft dimensions, design weights and classifications: FAA Aircraft Characteristics Database, October 2024.
+https://www.faa.gov/airports/engineering/aircraft_char_database
+Values describe the named FAA reference model. Individual configurations vary.
+
+Airport coordinates, runways, frequencies, regions and navaids: OurAirports, public domain.
+https://ourairports.com/data/ and https://github.com/davidmegginson/ourairports-data/tree/bdbcf5e2643119210d5c240f2e26ab2604ec5e38
+Duffel snapshot source: https://github.com/timrogers/iata-code-decoder-api/tree/a9bb73cde38a02d07a4d764d7ce7a742dba4b8b6/data
+See UPSTREAM-LICENSE.txt for the upstream project's MIT notice.
+Database Contents License: https://opendatacommons.org/licenses/dbcl/1-0/

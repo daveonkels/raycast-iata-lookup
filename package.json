@@ -1,0 +1,19 @@
+{
+  "name": "iata-offline",
+  "title": "IATA Lookup",
+  "description": "Find airport, airline, and aircraft codes offline.",
+  "icon": "flight-scope.png",
+  "author": "daveonkels",
+  "license": "MIT",
+  "platforms": ["macOS"],
+  "packageManager": "pnpm@11.19.0",
+  "commands": [
+    {
+      "name": "search",
+      "title": "Search IATA Codes",
+      "description": "Search offline by IATA or ICAO code, name, or city.",
+      "keywords": ["airport", "airline", "aircraft", "offline"],
+      "mode": "view"
+    }
+  ]
+}
